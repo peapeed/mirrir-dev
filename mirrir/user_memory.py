@@ -30,7 +30,7 @@ def load_user_memory(user_id):
 def save_user_memory(user_id, memory):
     path = get_user_memory_path(user_id)
     with open(path, "w") as f:
-        json.dump(memory, f, indent=4)
+        json.dump(memory, f, indent=3)
 
 
 def update_user_memory(user_id, key, value):

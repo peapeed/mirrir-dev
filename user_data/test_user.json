@@ -1,0 +1,14 @@
+{
+    "name": null,
+    "tone": "",
+    "favorite_things": [],
+    "feel_better_methods": [],
+    "common_feelings": [],
+    "conversation_examples": [
+        "Hello?",
+        "What does that mean haha",
+        "exit",
+        "goodbye",
+        "exit()"
+    ]
+}
