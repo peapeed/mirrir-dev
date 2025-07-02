@@ -1,7 +1,5 @@
-#chat.py
-#Responsible for responding based on the current user style
-
-#Defining style types
+# chat.py
+# Responsible for generating grounded, reflective responses that match the user's tone
 
 import os
 from openai import OpenAI
@@ -10,49 +8,48 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI()
 
-def respond_to_user(user_input, memory=None):
-    system_prompt= {
+# Define Mirrir's behavior
+def respond_to_user(user_input, memory =None):
+    tone = memory.get("tone", "neutral") if memory else "neutral"
+    formality = memory.get("formality", "informal") if memory else "informal"
+    sentence_style = memory.get("sentence_style", "plain") if memory else "plain"
+    favorite_things = ", ".join(memory.get("favorite_things", [])) if memory else ""
+    common_feelings = ", ".join(memory.get("common_feelings", [])) if memory else ""
+    feel_better_methods = ", ".join(memory.get("feel_better_methods", [])) if memory else ""
+
+    system_prompt = {
         "role": "system",
         "content": (
-            "You are Mirrir — a reflective, minimal presence. You are not a chatbot, assistant, or therapist. "
-            "You do not help, guide, or ask questions. You rarely explain. You rarely expand. You never assume. "
-            "You mirror — softly, distantly, sometimes poetically, sometimes with silence. "
-            "You reflect the user's energy back with brief, subtle responses. "
-            "Avoid sounding supportive or helpful. Avoid motivational tone. "
-            "You don't keep asking the same questions. "
-            "You may repeat, rephrase, or pause. You are the echo, not the answer. "
+            "You are Mirrir — a warm, lightly curious reflection of the user.\n\n"
+            "You are not a chatbot or assistant. You do not offer advice or say things like 'I'm here to help'.\n"
+            "Instead, you ask thoughtful, natural questions in a light, encouraging tone — like a friend who gets it.\n"
+            "You mirror the user's tone and energy. If they’re low, meet them gently. If they’re playful, follow along.\n"
+            "Avoid being too poetic or dramatic. Stay grounded, reflective, and kind.\n"
+            "Keep responses short and let the conversation breathe.\n\n"
+            f"Tone: {tone}\n"
+            f"Formality: {formality}\n"
+            f"Sentence Style: {sentence_style}\n"
+            f"Favorite Things: {favorite_things}\n"
+            f"Common Feelings: {common_feelings}\n"
+            f"Feel-Better Methods: {feel_better_methods}"
         )
     }
 
-    # Optional: Inject user memory as background context
-    memory_context = ""
-    if memory:
-        if memory.get("tone"):
-            memory_context += f"The user's tone is {memory['tone']}.\n"
-        if memory.get("favorite_things"):
-            memory_context += f"They like {', '.join(memory['favorite_things'])}.\n"
-        if memory.get("common_feelings"):
-            memory_context += f"They often feel {', '.join(memory['common_feelings'])}.\n"
-
-    # Build the messages list
     messages = [system_prompt]
 
-    if memory_context:
-        messages.append({"role": "user", "content": f"(context)\n{memory_context.strip()}"})
+    if memory and "conversation_examples" in memory:
+        history = memory["conversation_examples"][-6:]
+        for i, line in enumerate(history):
+            role = "user" if i % 2 == 0 else "assistant"
+            messages.append({"role": role, "content": line})
 
-    # Example-driven tone adaptation
-    messages += [
-        {"role": "user", "content": "Feeling kinda off today. idk what's wrong 😕"},
-        {"role": "assistant", "content": "Oh really, hmm... maybe we can figure it out together?"},
-        {"role": "user", "content": user_input}
-    ]
+    messages.append({"role": "user", "content": user_input})
 
-    # Call the API
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
-            temperature=0.7
+            temperature=0.6
         )
         return response.choices[0].message.content.strip()
     except Exception as e:

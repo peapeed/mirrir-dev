@@ -19,7 +19,9 @@ def load_user_memory(user_id):
     else:
         return {
             "name": None,
-            "tone": "",
+            "tone": "casual" or "formal" or "mixed",
+            "formality": "formal" or "casual",
+            "sentence_style": "short" or "long" or "fragmented" or "varied",
             "favorite_things": [],
             "feel_better_methods": [],
             "common_feelings": [],
@@ -30,7 +32,7 @@ def load_user_memory(user_id):
 def save_user_memory(user_id, memory):
     path = get_user_memory_path(user_id)
     with open(path, "w") as f:
-        json.dump(memory, f, indent=3)
+        json.dump(memory, f, indent=4)
 
 
 def update_user_memory(user_id, key, value):
