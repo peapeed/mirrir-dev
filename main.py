@@ -21,13 +21,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from typing import Optional
+
 class ChatRequest(BaseModel):
     message: str
-    session_id: str | None = None
+    session_id: Optional[str] = None
 
 class ChatResponse(BaseModel):
     reply: str
-    session_id: str | None = None
+    session_id: Optional[str] = None
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(req: ChatRequest):
