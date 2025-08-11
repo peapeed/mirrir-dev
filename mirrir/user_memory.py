@@ -2,6 +2,7 @@ import json
 import os
 
 MEMORY_DIR = "user_data"
+MAX_HISTORY = 10
 
 # Ensure the user data directory exists
 if not os.path.exists(MEMORY_DIR):
@@ -17,23 +18,26 @@ def load_user_memory(user_id):
         with open(path, "r") as f:
             return json.load(f)
     else:
-        return {
+        memory = {
             "name": None,
-            "tone": "casual" or "formal" or "mixed",
-            "formality": "formal" or "casual",
-            "sentence_style": "short" or "long" or "fragmented" or "varied",
+            "tone": "casual",
+            "formality": "informal",
+            "sentence_style": "short",
             "favorite_things": [],
             "feel_better_methods": [],
             "common_feelings": [],
-            "conversation_examples": []  # optional: keep snippets of how user talks
+            "conversation_examples": [],
+            "chat_history": []
         }
-
+        save_user_memory(user_id, memory)  # ✅ Save new file right away
+        return memory
 
 def save_user_memory(user_id, memory):
     path = get_user_memory_path(user_id)
     with open(path, "w") as f:
         json.dump(memory, f, indent=4)
 
+MAX_HISTORY = 10
 
 def update_user_memory(user_id, key, value):
     memory = load_user_memory(user_id)
@@ -44,3 +48,17 @@ def update_user_memory(user_id, key, value):
             memory[key] = value
         save_user_memory(user_id, memory)
     return memory
+
+MAX_HISTORY = 10
+
+def get_chat_history(user_id):
+    memory = load_user_memory(user_id)
+    return memory.get("chat_history", [])[-MAX_HISTORY:]
+
+def add_to_chat_history(user_id, role, content):
+    memory = load_user_memory(user_id)
+    if "chat_history" not in memory:
+        memory["chat_history"] = []
+    memory["chat_history"].append({"role": role, "content": content})
+    memory["chat_history"] = memory["chat_history"][-MAX_HISTORY:]  # Trim
+    save_user_memory(user_id, memory)
