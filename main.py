@@ -1,25 +1,30 @@
 from dotenv import load_dotenv
 load_dotenv()
+from mirrir.user_memory import get_chat_history, add_to_chat_history
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
-from mirrir.chat import respond_to_user         # <- single source of truth
-from mirrir.user_memory import (
-    load_user_memory, update_user_memory, save_user_memory
-)
-from mirrir.style_analysis import analyze_user_style
+from mirrir.onboarding import router as onboarding_router
 
 # ─── FastAPI app ──────────────────────────────────────────────────────────
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # DEV ONLY – lock down in prod
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],      # Allows all origins — for testing only
+    allow_credentials=True,   # Important if you use cookies/auth
+    allow_methods=["*"],      # Allow all HTTP methods
+    allow_headers=["*"],      # Allow all headers
 )
+
+app.include_router(onboarding_router)
+
+from mirrir.chat import respond_to_user         # <- single source of truth
+from mirrir.user_memory import (
+    load_user_memory, update_user_memory, save_user_memory
+)
+from mirrir.style_analysis import analyze_user_style
 
 from typing import Optional
 
@@ -33,8 +38,15 @@ class ChatResponse(BaseModel):
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(req: ChatRequest):
-    reply = respond_to_user(req.message)          # your core logic
-    return ChatResponse(reply=reply, session_id=req.session_id)
+    session_id = req.session_id or "default"
+
+    memory = load_user_memory(session_id)
+    reply = respond_to_user(req.message, memory)
+
+    # Update memory with the conversation turn
+    update_user_memory(session_id, "conversation_examples", {"user": req.message, "mirrir": reply})
+
+    return ChatResponse(reply=reply, session_id=session_id)
 
 
 # ─── Optional CLI loop ────────────────────────────────────────────────────
@@ -47,7 +59,7 @@ def main():
     memory = load_user_memory(user_id)
 
     #saving names
-    if not memory.get("name"):
+    if memory.get("name") in [None, ""]:
         memory["name"] = user_input_name
         save_user_memory(user_id, memory)
         
@@ -68,15 +80,14 @@ def main():
                 update_user_memory(user_id, key, value)
 
         # Save to conversation history
-        memory = update_user_memory(user_id, "conversation_examples", prompt)
+        memory = update_user_memory(user_id, "conversation_examples", {"user": prompt, "mirrir": response})
 
         # Generate response
         response = respond_to_user(prompt, memory)
         print(f"Mirrir: {response}")
 
         # After response.. Save updated memory
-        memory = update_user_memory(user_id, "conversation_examples", response)
+        memory = update_user_memory(user_id, "conversation_examples", {"user": prompt, "mirrir": response})
         save_user_memory(user_id, memory)
-
 if __name__ == "__main__":
     main()

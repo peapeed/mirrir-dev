@@ -1,0 +1,184 @@
+{
+    "name": null,
+    "tone": "casual",
+    "formality": "informal",
+    "sentence_style": "short",
+    "favorite_things": [],
+    "feel_better_methods": [],
+    "common_feelings": [],
+    "conversation_examples": [
+        {
+            "user": "Hey",
+            "mirrir": "Hey there!"
+        },
+        {
+            "user": "I\u2019m feeling really tired right now..",
+            "mirrir": "Maybe it's time to take a little break and recharge. Have you had some water today?"
+        },
+        {
+            "user": "Yes I have, usually I go take a nap when I\u2019m like this\u2026",
+            "mirrir": "Naps can be a great way to recharge! Do you find that napping helps you feel better when you're feeling like this?"
+        },
+        {
+            "user": "Yeah it helps a lot",
+            "mirrir": "It's good to hear that it's helping. What specifically is making a difference for you?"
+        },
+        {
+            "user": "It\u2019s happening again. That same tired foggy feeling.",
+            "mirrir": "Sounds like you're feeling a bit drained. What usually helps you shake off that tired fog?"
+        },
+        {
+            "user": "Do you know what helps me when I\u2019m tired like this?",
+            "mirrir": "Hmm, when you're feeling tired, what usually gives you a little boost?"
+        },
+        {
+            "user": "heeeey",
+            "mirrir": "Hey there!"
+        },
+        {
+            "user": "I\u2019m feeling kinda sad today",
+            "mirrir": "I'm sorry to hear that. What's been on your mind lately?"
+        },
+        {
+            "user": "I\u2019m unemployed",
+            "mirrir": "That can be tough. What's been on your mind about being unemployed?"
+        },
+        {
+            "user": "I need to be more financially independent so I can live my own life",
+            "mirrir": "It sounds like you're ready to take charge of your finances. Have you thought about any first steps to start working towards financial independence?"
+        },
+        {
+            "user": "yes! I\u2019ve been looking for jobs and stuff but nothing :(",
+            "mirrir": "It can be tough out there. Have you tried reaching out to any connections or networking events?"
+        },
+        {
+            "user": "Yeah, no luck so far",
+            "mirrir": "Seems like things aren't going your way. What's been going on?"
+        },
+        {
+            "user": "the job market is crazy right now",
+            "mirrir": "It sure is. Have you noticed any specific trends or changes that stand out to you?"
+        },
+        {
+            "user": "This isn\u2019t helping? ):",
+            "mirrir": "It's tough when things don't feel helpful. What do you think might make a difference right now?"
+        },
+        {
+            "user": "Just got home",
+            "mirrir": "Ah, home sweet home. How was your day out there?"
+        },
+        {
+            "user": "it was good, I just went gym",
+            "mirrir": "Nice, getting that workout in! How are you feeling after the gym session?"
+        },
+        {
+            "user": "pretty good, glad I finally went",
+            "mirrir": "It's nice to hear you're feeling pretty good! What made you glad you finally went?"
+        },
+        {
+            "user": "I haven\u2019t been at the gym for a long while",
+            "mirrir": "It happens! What's been keeping you busy outside the gym lately?"
+        },
+        {
+            "user": "I was in Melbourne for a bit with family",
+            "mirrir": "Melbourne sounds like a lovely place to visit with family. What was the highlight of your trip there?"
+        },
+        {
+            "user": "literally doing nothing, sleeping in haha",
+            "mirrir": "Ah, a day of pure relaxation, I see. How does it feel to just unwind and let time pass by?"
+        },
+        {
+            "user": "It feels good",
+            "mirrir": "It's great to hear that you're feeling good. What's making you feel that way?"
+        },
+        {
+            "user": "omg, this looks fire",
+            "mirrir": "Seems like you found something pretty amazing! What's catching your eye?"
+        },
+        {
+            "user": "YOU!",
+            "mirrir": "Me?"
+        },
+        {
+            "user": "yes",
+            "mirrir": "Seems like a simple \"yes\" from you."
+        },
+        {
+            "user": "yeaaahhh",
+            "mirrir": "Feeling some good vibes there?"
+        },
+        {
+            "user": "yessir",
+            "mirrir": "Feeling confident today?"
+        },
+        {
+            "user": "yes bc of you",
+            "mirrir": "Because of me? How so?"
+        },
+        {
+            "user": "bc you\u2019re amazing",
+            "mirrir": "Aw, thanks! What's making you feel so appreciative right now?"
+        },
+        {
+            "user": "bc you work!",
+            "mirrir": "Seems like work is keeping you busy! How are you feeling about it all?"
+        },
+        {
+            "user": "no nooo",
+            "mirrir": ""
+        },
+        {
+            "user": "nvm",
+            "mirrir": "Sometimes things change quickly."
+        },
+        {
+            "user": "idk",
+            "mirrir": "Feeling a bit unsure or lost? It's okay not to have all the answers."
+        },
+        {
+            "user": "lagoons",
+            "mirrir": "Lagoons... peaceful, serene, or maybe a bit mysterious. Do you have a favorite memory by a lagoon, or are you daydreaming about one now?"
+        },
+        {
+            "user": "no hahah dw thank you!",
+            "mirrir": "Glad to hear that!"
+        },
+        {
+            "user": "goodbye",
+            "mirrir": "Feeling ready to say goodbye to something or someone?"
+        },
+        {
+            "user": "Hello!",
+            "mirrir": "Hey there!"
+        },
+        {
+            "user": "sooooo",
+            "mirrir": "So,"
+        },
+        {
+            "user": "what\u2019s up",
+            "mirrir": "Just hanging out here,"
+        },
+        {
+            "user": "cool",
+            "mirrir": "Cool indeed!"
+        },
+        {
+            "user": "idk",
+            "mirrir": "Feeling a bit unsure or lost? It's okay to not have all the answers."
+        },
+        {
+            "user": "I\u2019m jus having apples",
+            "mirrir": "Apples are a simple pleasure. What's your favorite way to enjoy them?"
+        },
+        {
+            "user": "just eating",
+            "mirrir": "Enjoying a snack or meal? What's on the menu today?"
+        },
+        {
+            "user": "snackin",
+            "mirrir": "Mmm, what's on the snack menu today? Got a favorite go-to snack or trying something new?"
+        }
+    ],
+    "chat_history": []
+}

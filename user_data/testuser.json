@@ -1,0 +1,20 @@
+{
+    "name": "TestUser",
+    "tone": "friendly",
+    "favorite_things": [
+        "coffee",
+        "reading"
+    ],
+    "feel_better_methods": [
+        "nap",
+        "walk"
+    ],
+    "common_feelings": [
+        "happy",
+        "thoughtful"
+    ],
+    "conversation_examples": [
+        "Hello!",
+        "How are you today?"
+    ]
+}
